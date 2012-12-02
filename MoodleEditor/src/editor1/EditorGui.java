@@ -97,6 +97,7 @@ public class EditorGui extends JFrame {
 		JTabbedPane tabbedPane = new JTabbedPane();        
 		add(tabbedPane);
 		
+		// ## add some test tabs
 		testTabs(tabbedPane);
 
 		// register for windowClosing event in case user
