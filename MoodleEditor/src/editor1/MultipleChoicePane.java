@@ -21,10 +21,10 @@ public class MultipleChoicePane extends JPanel {
 	 * Create the panel.
 	 */
 	public MultipleChoicePane() {
-		setLayout(new MigLayout("", "[31.00][16.00][grow][][47.00][]", "[38][grow][][][][][][][][33.00][12.00][79.00,grow][26.00]"));
+		setLayout(new MigLayout("", "[31.00][16.00][grow][][47.00][]", "[][grow][][][][][][][][33.00][12.00][79.00,grow][][26.00]"));
 		
 		JLabel lblQuestionTitle = new JLabel("Question Title:");
-		add(lblQuestionTitle, "cell 0 0,alignx right,aligny center");
+		add(lblQuestionTitle, "cell 0 0,alignx right,aligny top");
 		
 		JScrollPane scrollPane = new JScrollPane();
 		add(scrollPane, "cell 1 0 5 1,grow");
@@ -84,17 +84,17 @@ public class MultipleChoicePane extends JPanel {
 		JSpinner spinner_3 = new JSpinner();
 		add(spinner_3, "cell 5 7,growx,aligny top");
 		
-		JButton btnClearAllFields = new JButton("Clear All Fields");
+		JButton btnClearAllFields = new JButton("Clear Question Text");
 		add(btnClearAllFields, "cell 4 8 2 1,growx,aligny top");
 		
-		JButton button = new JButton("Save Question ");
-		add(button, "cell 4 9 2 1,growx,aligny top");
+		JButton btnAppendQuestion = new JButton("Append Question");
+		add(btnAppendQuestion, "cell 4 9 2 1,growx,aligny top");
 		
 		JSeparator separator = new JSeparator();
 		add(separator, "cell 1 10 5 1,grow");
 		
-		JLabel label = new JLabel("Output:");
-		add(label, "cell 0 11,alignx right,aligny top");
+		JLabel lblGeneratedQuestions = new JLabel("Questions:");
+		add(lblGeneratedQuestions, "cell 0 11,alignx right,aligny top");
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
 		add(scrollPane_2, "cell 1 11 5 1,grow");
@@ -104,8 +104,11 @@ public class MultipleChoicePane extends JPanel {
 		textArea_2.setBackground(SystemColor.control);
 		scrollPane_2.setViewportView(textArea_2);
 		
-		JButton button_1 = new JButton("Append to Output");
-		add(button_1, "cell 4 12 2 1,growx");
+		JButton btnNewButton = new JButton("Clear Questions List");
+		add(btnNewButton, "cell 4 12 2 1,growx");
+		
+		JButton btnAddQuestions = new JButton("Add Questions to File");
+		add(btnAddQuestions, "cell 4 13 2 1,growx");
 
 	}
 
