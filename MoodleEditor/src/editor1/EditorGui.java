@@ -1,7 +1,6 @@
 package editor1;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -9,8 +8,6 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
-
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -29,6 +26,9 @@ import javax.swing.border.EmptyBorder;
 public class EditorGui extends JFrame {
 
 	private JPanel contentPane;
+	private MultipleChoicePaneAdv multiChoice;
+	private TrueFalsePane trueFalse;
+	public GiftFormatter EditorFormatter;
 	ExitAction exitAction;
 
 	/**
@@ -36,6 +36,9 @@ public class EditorGui extends JFrame {
 	 */
 	public EditorGui() {
 		super("Moodle Editor");
+		
+		// create new formatter
+		EditorFormatter = new GiftFormatter();
 		
 		// find installed look & feels set to 'Nimbus' if available.
 		String select = "Nimbus";
@@ -99,10 +102,6 @@ public class EditorGui extends JFrame {
 		tabbedPane.add("True/False", createTrueFalseQ()); // create & add true/false frame
 		tabbedPane.add("Multiple Choice", createMultiChoiceQ()); // create & add true/false frame
 		
-		
-		
-		
-		
 		c.add(tabbedPane); // add tab to super in this case a JFrame
 		
 		// ## add some test tabs
@@ -120,29 +119,29 @@ public class EditorGui extends JFrame {
 	}
 
 	private JPanel createMultiChoiceQ() {
-		MultipleChoicePane multiChoice = new MultipleChoicePane();
+		multiChoice = new MultipleChoicePaneAdv(EditorFormatter);
 		return multiChoice;
 		// TODO Auto-generated method stub
 	}
 
 	private JPanel createTrueFalseQ() {
-		TrueFalsePane trueFalse = new TrueFalsePane();
+		trueFalse = new TrueFalsePane(EditorFormatter);
 		return trueFalse;
 		// TODO Auto-generated method stub
 	}
 
-	private void testTabs(JTabbedPane tabbedPane) {
-		ArrayList<JComponent> tabs = new ArrayList<JComponent>();
-		tabs.add(makeTextPanel("TEST PANEL #1"));
-		tabs.add(makeTextPanel("TEST PANEL #2"));
-		tabs.add(makeTextPanel("TEST PANEL #3"));
-		tabs.add(makeTextPanel("TEST PANEL #4"));
-		
-		for (int ii = 0; ii < 4; ii++) {
-			tabbedPane.addTab("Tab " + (ii + 1), null, tabs.get(ii), "Test Tab " + ii);
-		}
-        
-	}
+//	private void testTabs(JTabbedPane tabbedPane) {
+//		ArrayList<JComponent> tabs = new ArrayList<JComponent>();
+//		tabs.add(makeTextPanel("TEST PANEL #1"));
+//		tabs.add(makeTextPanel("TEST PANEL #2"));
+//		tabs.add(makeTextPanel("TEST PANEL #3"));
+//		tabs.add(makeTextPanel("TEST PANEL #4"));
+//		
+//		for (int ii = 0; ii < 4; ii++) {
+//			tabbedPane.addTab("Tab " + (ii + 1), null, tabs.get(ii), "Test Tab " + ii);
+//		}
+//        
+//	}
 	
     protected JComponent makeTextPanel(String text) {
         JPanel panel = new JPanel(false);
