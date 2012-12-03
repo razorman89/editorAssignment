@@ -8,6 +8,8 @@ import javax.swing.JTextArea;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JSpinner;
+
+import java.awt.Dimension;
 import java.awt.SystemColor;
 import javax.swing.JSeparator;
 import java.awt.event.ActionListener;
@@ -21,7 +23,6 @@ public class MultipleChoicePaneAdv extends JPanel {
 	private GiftFormatter localFormatter;
 	private ArrayList<JTextField> answerFields = new ArrayList<JTextField>();
 	private ArrayList<JSpinner> answerSpinners = new ArrayList<JSpinner>();
-	private ArrayList<JLabel> answerLabels = new ArrayList<JLabel>();
 	private int rowCount = 1;
 
 	/**
@@ -39,7 +40,7 @@ public class MultipleChoicePaneAdv extends JPanel {
 		JScrollPane scrollPane = new JScrollPane();
 		add(scrollPane, "cell 1 0 6 1,grow");
 		
-		JTextArea questionTitle = new JTextArea();
+		final JTextArea questionTitle = new JTextArea();
 		scrollPane.setViewportView(questionTitle);
 		
 		JLabel lblQuestion = new JLabel("Question:");
@@ -48,7 +49,7 @@ public class MultipleChoicePaneAdv extends JPanel {
 		JScrollPane scrollPane_1 = new JScrollPane();
 		add(scrollPane_1, "cell 1 1 6 3,grow");
 		
-		JTextArea questionBody = new JTextArea();
+		final JTextArea questionBody = new JTextArea();
 		scrollPane_1.setViewportView(questionBody);
 		
 		JLabel lblAnswers = new JLabel("Answer(s):");
@@ -56,11 +57,6 @@ public class MultipleChoicePaneAdv extends JPanel {
 		
 		JScrollPane scrollPane_3 = new JScrollPane();
 		add(scrollPane_3, "cell 2 4 5 1,grow");
-		
-		
-		
-		
-		
 		
 		final JPanel answersPanel = new JPanel();
 		scrollPane_3.setViewportView(answersPanel);
@@ -84,16 +80,44 @@ public class MultipleChoicePaneAdv extends JPanel {
 		answersPanel.add(ansSpinner1, "flowy, cell 1 1,growx");
 		answerSpinners.add(ansSpinner1);
 		
-		JButton btnNewAnswer = new JButton("Add Answer");
+		JButton btnNewAnswer = new JButton("Add Answer");		
+		JButton btnClearText = new JButton("Clear Question Text");
+		add(btnClearText, "cell 5 5 2 1,growx,aligny top");
+
+		JButton btnAppendQuestion = new JButton("Append Question");
+		add(btnAppendQuestion, "cell 5 6 2 1,growx,aligny top");
+		
+		JSeparator separator = new JSeparator();
+		add(separator, "cell 2 7 5 1,grow");
+		
+		JLabel lblGeneratedQuestions = new JLabel("Questions:");
+		add(lblGeneratedQuestions, "cell 0 8,alignx right,aligny top");
+		
+		JScrollPane scrollPane_2 = new JScrollPane();
+		add(scrollPane_2, "cell 2 8 5 1,grow");
+		
+		final JTextArea questionsList = new JTextArea();
+		questionsList.setEditable(false);
+		questionsList.setBackground(SystemColor.control);
+		scrollPane_2.setViewportView(questionsList);
+		
+		JButton btnClearQuestionsList = new JButton("Clear Questions List");
+		add(btnClearQuestionsList, "cell 5 9 2 1,growx");
+		
+		JButton btnAddQuestions = new JButton("Add Questions to File");
+		add(btnAddQuestions, "cell 5 10 2 1,growx");
+		
+		
+		
 		btnNewAnswer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				rowCount++;
 				JTextField ansField = new JTextField();
-				answersPanel.add(ansField, "flowy, cell 0 0,growx");
+				answersPanel.add(ansField, "flowy, cell 0 1,growx");
 				ansField.setColumns(10);
 				answerFields.add(ansField);
 				JSpinner ansSpinner = new JSpinner();
-				answersPanel.add(ansSpinner, "flowy, cell 1 0,growx");
+				answersPanel.add(ansSpinner, "flowy, cell 1 1,growx");
 				answerSpinners.add(ansSpinner);
 				answersPanel.updateUI();
 			}
@@ -115,33 +139,28 @@ public class MultipleChoicePaneAdv extends JPanel {
 		});
 		add(btnRemoveAnswer, "cell 2 6,growx,aligny top");
 		
-		JButton btnClearText = new JButton("Clear Question Text");
-		add(btnClearText, "cell 5 5 2 1,growx,aligny top");
+		btnClearText.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				questionTitle.setText("");
+				questionBody.setText("");
+				for (int ii = 0; ii < answerFields.size(); ii++) {
+					answerFields.get(ii).setText("");
+					answerSpinners.get(ii).setValue(0);
+					
+				}
+			}
+		});
 		
-
+		btnAppendQuestion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		
-		JButton btnAppendQuestion = new JButton("Append Question");
-		add(btnAppendQuestion, "cell 5 6 2 1,growx,aligny top");
-		
-		JSeparator separator = new JSeparator();
-		add(separator, "cell 2 7 5 1,grow");
-		
-		JLabel lblGeneratedQuestions = new JLabel("Questions:");
-		add(lblGeneratedQuestions, "cell 0 8,alignx right,aligny top");
-		
-		JScrollPane scrollPane_2 = new JScrollPane();
-		add(scrollPane_2, "cell 2 8 5 1,grow");
-		
-		JTextArea questionsList = new JTextArea();
-		questionsList.setEditable(false);
-		questionsList.setBackground(SystemColor.control);
-		scrollPane_2.setViewportView(questionsList);
-		
-		JButton btnClearQuestionsList = new JButton("Clear Questions List");
-		add(btnClearQuestionsList, "cell 5 9 2 1,growx");
-		
-		JButton btnAddQuestions = new JButton("Add Questions to File");
-		add(btnAddQuestions, "cell 5 10 2 1,growx");
+		btnClearQuestionsList.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				questionsList.setText("");
+			}
+		});
 
 	}
 
