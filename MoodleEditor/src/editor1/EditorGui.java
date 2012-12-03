@@ -1,6 +1,7 @@
 package editor1;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -93,12 +94,19 @@ public class EditorGui extends JFrame {
 		c.add(navToolBar, BorderLayout.NORTH);
 		c.add(contentPane, BorderLayout.CENTER);
 		
-		// create tabbed pane
-		JTabbedPane tabbedPane = new JTabbedPane();        
-		add(tabbedPane);
+		// create tabbed pane & add tabs
+		JTabbedPane tabbedPane = new JTabbedPane();
+		tabbedPane.add("True/False", createTrueFalseQ()); // create & add true/false frame
+		tabbedPane.add("Multiple Choice", createMultiChoiceQ()); // create & add true/false frame
+		
+		
+		
+		
+		
+		c.add(tabbedPane); // add tab to super in this case a JFrame
 		
 		// ## add some test tabs
-		testTabs(tabbedPane);
+//		testTabs(tabbedPane);
 
 		// register for windowClosing event in case user
 		// does not select Exit from File menu to terminate
@@ -109,6 +117,18 @@ public class EditorGui extends JFrame {
 			}
 		});
 		
+	}
+
+	private JPanel createMultiChoiceQ() {
+		MultipleChoicePane multiChoice = new MultipleChoicePane();
+		return multiChoice;
+		// TODO Auto-generated method stub
+	}
+
+	private JPanel createTrueFalseQ() {
+		TrueFalsePane trueFalse = new TrueFalsePane();
+		return trueFalse;
+		// TODO Auto-generated method stub
 	}
 
 	private void testTabs(JTabbedPane tabbedPane) {
