@@ -24,8 +24,9 @@ public class MatchingPane extends JPanel {
 	private GiftFormatter localFormatter;
 	private Dimension checkDimension = new Dimension(0, 28);
 	private ArrayList<JTextField> answerFields = new ArrayList<JTextField>();
-	private ArrayList<JTextField> questionsFields = new ArrayList<JTextField>();
+	private ArrayList<JTextField> questionFields = new ArrayList<JTextField>();
 	private ArrayList<JCheckBox> checkBoxs = new ArrayList<JCheckBox>();
+	private int index = 0;
 
 	/**
 	 * Create the panel.
@@ -42,8 +43,8 @@ public class MatchingPane extends JPanel {
 		JScrollPane scrollPane = new JScrollPane();
 		add(scrollPane, "cell 1 0 3 1,grow");
 		
-		JTextArea textArea = new JTextArea();
-		scrollPane.setViewportView(textArea);
+		final JTextArea questionTitle = new JTextArea();
+		scrollPane.setViewportView(questionTitle);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		add(scrollPane_1, "cell 1 1 4 1,grow");
@@ -72,7 +73,7 @@ public class MatchingPane extends JPanel {
 		JTextField questionTextField_1 = new JTextField();
 		questionTextField_1.setToolTipText("Question");
 		answersPanel.add(questionTextField_1, "flowy,cell 2 1,growx");
-		questionsFields.add(questionTextField_1);
+		questionFields.add(questionTextField_1);
 		
 		JTextField answerTextField_1 = new JTextField();
 		answerTextField_1.setToolTipText("Answer");
@@ -88,7 +89,7 @@ public class MatchingPane extends JPanel {
 		JTextField questionTextField_2 = new JTextField();
 		questionTextField_2.setToolTipText("Question");
 		answersPanel.add(questionTextField_2, "flowy,cell 2 2,growx");
-		questionsFields.add(questionTextField_2);
+		questionFields.add(questionTextField_2);
 		
 		JTextField answerTextField_2 = new JTextField();
 		answerTextField_2.setToolTipText("Answer");
@@ -124,10 +125,10 @@ public class MatchingPane extends JPanel {
 		JScrollPane scrollPane_2 = new JScrollPane();
 		add(scrollPane_2, "cell 1 5 3 1,grow");
 		
-		JTextArea textArea_1 = new JTextArea();
-		textArea_1.setBackground(SystemColor.control);
-		textArea_1.setEditable(false);
-		scrollPane_2.setViewportView(textArea_1);
+		final JTextArea questionsList = new JTextArea();
+		questionsList.setBackground(SystemColor.control);
+		questionsList.setEditable(false);
+		scrollPane_2.setViewportView(questionsList);
 		
 		JButton button_2 = new JButton("Clear Questions List");
 		add(button_2, "cell 3 6,growx");
@@ -141,7 +142,7 @@ public class MatchingPane extends JPanel {
 				JTextField questionTextField = new JTextField();
 				questionTextField.setToolTipText("Question");
 				answersPanel.add(questionTextField, "flowy,cell 2 2,growx");
-				questionsFields.add(questionTextField);
+				questionFields.add(questionTextField);
 				
 				JTextField answerTextField = new JTextField();
 				answerTextField.setToolTipText("Answer");
@@ -159,21 +160,56 @@ public class MatchingPane extends JPanel {
 		
 		btnDeleteSelected.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				ArrayList<Integer> removes = new ArrayList<Integer>();
 				for (int ii = 0; ii < checkBoxs.size(); ii++) {
 					if(checkBoxs.get(ii).isSelected()){
-						answersPanel.remove(answerFields.get(ii));
-						answersPanel.remove(questionsFields.get(ii));
-						answersPanel.remove(checkBoxs.get(ii));
-						answerFields.remove(ii);
-						questionsFields.remove(ii);
-						checkBoxs.remove(ii);
+						removes.add(ii);
 					}
+				}
+//				System.out.println("\n-------------------------\n" + "ANSWERS :" + answerFields.size() + "\nQUESTIONS :" + 
+//						questionsFields.size() + "\nREMOVES :" + removes.size()+"\n-------------------------\n");
+				
+				for (int jj = 0; jj < removes.size(); jj++) {
+					answersPanel.remove(answerFields.get(removes.get(jj).intValue()));
+					answersPanel.remove(questionFields.get(removes.get(jj).intValue()));
+					answersPanel.remove(checkBoxs.get(removes.get(jj).intValue()));
+					answerFields.remove(removes.get(jj).intValue());
+					questionFields.remove(removes.get(jj).intValue());
+					checkBoxs.remove(removes.get(jj).intValue());
 				}
 				answersPanel.updateUI();			
 			}
 		});
+		
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				clearInputs(questionTitle);
+			}
+		});
+		
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				index++;
+				questionsList.append("//Question " + index + "\n" + localFormatter.buildMatchQAs(questionTitle.getText(),questionFields, answerFields) + "\n\n");
+				clearInputs(questionTitle);
+			}
+		});
+		
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				questionsList.setText("");
+			}
+		});
 
+	}
+	
+	private void clearInputs(final JTextArea questionTitle) {
+		questionTitle.setText("");
+		for (int ii = 0; ii < answerFields.size(); ii++) {
+			answerFields.get(ii).setText("");
+			questionFields.get(ii).setText("");
+			checkBoxs.get(ii).setSelected(false);
+		}
 	}
 
 }
