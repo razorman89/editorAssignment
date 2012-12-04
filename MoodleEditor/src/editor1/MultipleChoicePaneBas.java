@@ -1,22 +1,22 @@
 package editor1;
 
 
+import java.awt.Dimension;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
-import javax.swing.JSpinner;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-
 import net.miginfocom.swing.MigLayout;
+import javax.swing.JRadioButton;
 
 @SuppressWarnings("serial")
 public class MultipleChoicePaneBas extends JPanel {
@@ -24,7 +24,8 @@ public class MultipleChoicePaneBas extends JPanel {
 	private GiftFormatter localFormatter;
 	private ArrayList<JTextField> answerFields = new ArrayList<JTextField>();
 	private ArrayList<JTextField> feedbackFields = new ArrayList<JTextField>();
-	private ArrayList<JSpinner> answerSpinners = new ArrayList<JSpinner>();
+	private ArrayList<JRadioButton> radioSelectors = new ArrayList<JRadioButton>();
+	private Dimension radioDimension = new Dimension(0, 28);
 	private int rowCount = 1;
 	private int index = 0;
 //	private SpinnerNumberModel rangeSpinnerModel = new SpinnerNumberModel(0, 0, 1000.0, 0.001);
@@ -85,8 +86,8 @@ public class MultipleChoicePaneBas extends JPanel {
 		separator_2.setOrientation(SwingConstants.VERTICAL);
 		answersPanel.add(separator_2, "cell 4 0,grow");
 		
-		JLabel lblMark = new JLabel("Mark");
-		answersPanel.add(lblMark, "cell 5 0");
+		JLabel lblCorrect = new JLabel("Select");
+		answersPanel.add(lblCorrect, "cell 5 0");
 		
 		JTextField ansField1 = new JTextField();
 		ansField1.setToolTipText("Answer");
@@ -98,9 +99,13 @@ public class MultipleChoicePaneBas extends JPanel {
 		answersPanel.add(txtFeedback_1, "flowy,cell 3 1,growx");
 		feedbackFields.add(txtFeedback_1);
 		
-		JSpinner ansSpinner = new JSpinner();
-		answersPanel.add(ansSpinner, "flowy,cell 5 1,growx");
-		answerSpinners.add(ansSpinner);
+		final ButtonGroup radioGroup = new ButtonGroup();
+		
+		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Correct");
+		rdbtnNewRadioButton_1.setPreferredSize(radioDimension);
+		answersPanel.add(rdbtnNewRadioButton_1, "flowy,cell 5 1,growx");
+		radioGroup.add(rdbtnNewRadioButton_1);
+		radioSelectors.add(rdbtnNewRadioButton_1);		
 		
 		JTextField ansField2 = new JTextField();
 		ansField2.setToolTipText("Answer");
@@ -112,9 +117,11 @@ public class MultipleChoicePaneBas extends JPanel {
 		answersPanel.add(txtFeedback_2, "flowy,cell 3 2,growx");
 		feedbackFields.add(txtFeedback_2);
 		
-		JSpinner ansSpinner1 = new JSpinner();
-		answersPanel.add(ansSpinner1, "flowy,cell 5 2,growx");
-		answerSpinners.add(ansSpinner1);
+		JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("Correct");
+		rdbtnNewRadioButton_2.setPreferredSize(radioDimension);
+		answersPanel.add(rdbtnNewRadioButton_2, "flowy,cell 5 2,growx");
+		radioGroup.add(rdbtnNewRadioButton_2);
+		radioSelectors.add(rdbtnNewRadioButton_2);
 		
 		JButton btnNewAnswer = new JButton("Add Answer");		
 		JButton btnClearText = new JButton("Clear Question Text");
@@ -132,10 +139,10 @@ public class MultipleChoicePaneBas extends JPanel {
 		JScrollPane scrollPane_2 = new JScrollPane();
 		add(scrollPane_2, "cell 2 8 5 1,grow");
 		
-		final JTextArea questionsMultiAdvGiftyList = new JTextArea();
-		questionsMultiAdvGiftyList.setEditable(false);
-		questionsMultiAdvGiftyList.setBackground(SystemColor.control);
-		scrollPane_2.setViewportView(questionsMultiAdvGiftyList);
+		final JTextArea questionsMultiBasGiftyList = new JTextArea();
+		questionsMultiBasGiftyList.setEditable(false);
+		questionsMultiBasGiftyList.setBackground(SystemColor.control);
+		scrollPane_2.setViewportView(questionsMultiBasGiftyList);
 		
 		JButton btnClearQuestionsList = new JButton("Clear Questions List");
 		add(btnClearQuestionsList, "cell 5 9 2 1,growx");
@@ -149,7 +156,6 @@ public class MultipleChoicePaneBas extends JPanel {
 				rowCount++;
 				JTextField ansField = new JTextField();
 				answersPanel.add(ansField, "flowy, cell 1 2,growx");
-				ansField.setColumns(10);
 				answerFields.add(ansField);
 				
 				JTextField txtFeedback = new JTextField();
@@ -157,9 +163,11 @@ public class MultipleChoicePaneBas extends JPanel {
 				answersPanel.add(txtFeedback, "flowy, cell 3 2,growx");
 				feedbackFields.add(txtFeedback);				
 				
-				JSpinner ansSpinner = new JSpinner();
-				answersPanel.add(ansSpinner, "flowy, cell 5 2,growx");
-				answerSpinners.add(ansSpinner);
+				JRadioButton rdbtnNewRadioButton = new JRadioButton("Correct");
+				rdbtnNewRadioButton.setPreferredSize(radioDimension);
+				answersPanel.add(rdbtnNewRadioButton, "flowy, cell 5 2, growx");
+				radioGroup.add(rdbtnNewRadioButton);
+				radioSelectors.add(rdbtnNewRadioButton);	
 
 				answersPanel.updateUI();
 			}
@@ -172,10 +180,10 @@ public class MultipleChoicePaneBas extends JPanel {
 				if(rowCount > 1){
 					answersPanel.remove(answerFields.get(rowCount));
 					answersPanel.remove(feedbackFields.get(rowCount));
-					answersPanel.remove(answerSpinners.get(rowCount));
+					answersPanel.remove(radioSelectors.get(rowCount));
 					answerFields.remove(rowCount);
 					feedbackFields.remove(rowCount);
-					answerSpinners.remove(rowCount);
+					radioSelectors.remove(rowCount);
 					answersPanel.updateUI();
 					rowCount--;					
 				}
@@ -185,34 +193,34 @@ public class MultipleChoicePaneBas extends JPanel {
 		
 		btnClearText.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				clearInput(questionTitle, questionBody);
+				clearInput(questionTitle, questionBody, radioGroup);
 			}
 		});
 		
 		btnAppendQuestion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				index++;
-				questionsMultiAdvGiftyList.append("//Question " + index + "\n" + localFormatter.buildMultiChoiceAdv(questionTitle.getText(), questionBody.getText(), answerFields, feedbackFields, answerSpinners) + "\n\n");
-				clearInput(questionTitle, questionBody);
+				questionsMultiBasGiftyList.append("//Question " + index + "\n" + localFormatter.buildMultiChoiceBas(questionTitle.getText(), questionBody.getText(), answerFields, feedbackFields, radioSelectors) + "\n\n");
+				clearInput(questionTitle, questionBody, radioGroup);
 			}
 		});
 		
 		btnClearQuestionsList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				questionsMultiAdvGiftyList.setText("");
+				questionsMultiBasGiftyList.setText("");
 				index = 0;
 			}
 		});
 
 	}
 	
-	private void clearInput(final JTextArea questionTitle, final JTextArea questionBody) {
+	private void clearInput(final JTextArea questionTitle, final JTextArea questionBody, ButtonGroup radioGroup) {
 		questionTitle.setText("");
 		questionBody.setText("");
 		for (int ii = 0; ii < answerFields.size(); ii++) {
 			answerFields.get(ii).setText("");
 			feedbackFields.get(ii).setText("");
-			answerSpinners.get(ii).setValue(0);
+			radioGroup.clearSelection();
 			
 		}
 	}
