@@ -29,6 +29,7 @@ public class EditorGui extends JFrame {
 	private JPanel contentPane;
 	private MultipleChoicePaneAdv multiChoiceAdv;
 	private MultipleChoicePaneBas multiChoiceBas;
+	private MatchingPane matchingQuestion;
 	private TrueFalsePane trueFalse;
 	public GiftFormatter EditorFormatter;
 	ExitAction exitAction;
@@ -104,6 +105,7 @@ public class EditorGui extends JFrame {
 		tabbedPane.add("True/False", createTrueFalseQ()); // create & add true/false frame
 		tabbedPane.add("Multiple Choice Advanced", createMultiChoiceQAdv()); // create & add 
 		tabbedPane.add("Multiple Choice Basic", createMultiChoiceQBas()); // create & add 
+		tabbedPane.add("Matching", createMatchingQ()); // create & add 
 		
 		c.add(tabbedPane); // add tab to super in this case a JFrame
 		
@@ -120,8 +122,14 @@ public class EditorGui extends JFrame {
 		});
 		
 	}
+	
+	private JPanel createMatchingQ() {
+		matchingQuestion = new MatchingPane(EditorFormatter);
+		return matchingQuestion;
+		// TODO Auto-generated method stub
+	}
 
-	private Component createMultiChoiceQBas() {
+	private JPanel createMultiChoiceQBas() {
 		multiChoiceBas = new MultipleChoicePaneBas(EditorFormatter);
 		return multiChoiceBas;
 		// TODO Auto-generated method stub
