@@ -7,8 +7,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 
 public class GiftFormatter {
-	
-	
+
 	public GiftFormatter(){
 		
 	}
@@ -19,9 +18,9 @@ public class GiftFormatter {
 		qAnswer = stringConverter(qAnswer);
 		
 		System.out.println("TITLE: " + qTitle + "\nBODY: " + qBody + "\nANSWER: " + qAnswer);
-		
 		String tfQuestion = "";
 		tfQuestion = ("::" + qTitle + "::" + qBody + "{" + qAnswer + "}");
+		
 		return tfQuestion;
 	}
 	
@@ -45,7 +44,6 @@ public class GiftFormatter {
 		}
 		
 		multiAdvQuestion += ("\n}");
-		
 		return multiAdvQuestion;
 	}
 	
@@ -74,13 +72,33 @@ public class GiftFormatter {
 		}
 		
 		multiBasQuestion += ("\n}");
-		
 		return multiBasQuestion;
 	}
 	
-	private String stringConverter(String string){
+	public String buildMatchQAs(String qTitle, ArrayList<JTextField> questionFields, ArrayList<JTextField> answerFields) {
+		qTitle = stringConverter(qTitle);
 		
-		System.out.println("BEFORE REPLACE: " + string);
+		for (int jj = 0; jj < answerFields.size(); jj++) {
+			
+			String questionHolder = stringConverter(questionFields.get(jj).getText());
+			questionFields.get(jj).setText(questionHolder);
+			
+			String answerHolder = stringConverter(answerFields.get(jj).getText());
+			answerFields.get(jj).setText(answerHolder);
+		}
+		
+		String matchQAsQuestion = "";
+		matchQAsQuestion = ("::" + qTitle + "{");
+		
+		for (int ii = 0; ii < answerFields.size(); ii++) {
+			matchQAsQuestion += ("\n=" + questionFields.get(ii).getText() + " -> " + answerFields.get(ii).getText());
+		}
+		
+		matchQAsQuestion += ("\n}");
+		return matchQAsQuestion;
+	}	
+	
+	private String stringConverter(String string){
 		
 		string = string.replace("~", "\\~");
 		string = string.replace("::", "\\::");
@@ -89,10 +107,7 @@ public class GiftFormatter {
 		string = string.replace("=", "\\=");
 		string = string.replace("#", "\\#");
 		
-		System.out.println("AFTER REPLACE: " + string);
-		
 		return string;
-		
-	}	
+	}
 
 }
