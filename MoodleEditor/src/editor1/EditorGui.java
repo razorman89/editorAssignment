@@ -1,6 +1,7 @@
 package editor1;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -26,7 +27,8 @@ import javax.swing.border.EmptyBorder;
 public class EditorGui extends JFrame {
 
 	private JPanel contentPane;
-	private MultipleChoicePaneAdv multiChoice;
+	private MultipleChoicePaneAdv multiChoiceAdv;
+	private MultipleChoicePaneBas multiChoiceBas;
 	private TrueFalsePane trueFalse;
 	public GiftFormatter EditorFormatter;
 	ExitAction exitAction;
@@ -100,7 +102,8 @@ public class EditorGui extends JFrame {
 		// create tabbed pane & add tabs
 		JTabbedPane tabbedPane = new JTabbedPane();
 		tabbedPane.add("True/False", createTrueFalseQ()); // create & add true/false frame
-		tabbedPane.add("Multiple Choice", createMultiChoiceQ()); // create & add true/false frame
+		tabbedPane.add("Multiple Choice Advanced", createMultiChoiceQAdv()); // create & add 
+		tabbedPane.add("Multiple Choice Basic", createMultiChoiceQBas()); // create & add 
 		
 		c.add(tabbedPane); // add tab to super in this case a JFrame
 		
@@ -118,9 +121,15 @@ public class EditorGui extends JFrame {
 		
 	}
 
-	private JPanel createMultiChoiceQ() {
-		multiChoice = new MultipleChoicePaneAdv(EditorFormatter);
-		return multiChoice;
+	private Component createMultiChoiceQBas() {
+		multiChoiceBas = new MultipleChoicePaneBas(EditorFormatter);
+		return multiChoiceBas;
+		// TODO Auto-generated method stub
+	}
+
+	private JPanel createMultiChoiceQAdv() {
+		multiChoiceAdv = new MultipleChoicePaneAdv(EditorFormatter);
+		return multiChoiceAdv;
 		// TODO Auto-generated method stub
 	}
 

@@ -1,22 +1,25 @@
 package editor1;
 
-import javax.swing.JPanel;
-import net.miginfocom.swing.MigLayout;
-import javax.swing.JLabel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JButton;
-import javax.swing.JTextField;
-import javax.swing.JSpinner;
+
 import java.awt.SystemColor;
-import javax.swing.JSeparator;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.JSpinner;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import net.miginfocom.swing.MigLayout;
+
 @SuppressWarnings("serial")
-public class MultipleChoicePaneAdv extends JPanel {
+public class MultipleChoicePaneBas extends JPanel {
 	
 	private GiftFormatter localFormatter;
 	private ArrayList<JTextField> answerFields = new ArrayList<JTextField>();
@@ -31,7 +34,7 @@ public class MultipleChoicePaneAdv extends JPanel {
 	 * Create the panel.
 	 * @param editorFormatter 
 	 */
-	public MultipleChoicePaneAdv(GiftFormatter editorFormatter) {
+	public MultipleChoicePaneBas(GiftFormatter editorFormatter) {
 		
 		this.localFormatter = editorFormatter;
 		setLayout(new MigLayout("", "[31.00][][16.00][grow][grow][47.00][]", "[][grow][][][170][][33.00][12.00][79.00,grow][][26.00]"));

@@ -102,12 +102,10 @@ public class TrueFalsePane extends JPanel {
 		
 		btnClearText.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				questionTitle.setText("");
-				questionBody.setText("");
-				radioGroup.clearSelection();		
+				clearInput(questionTitle, questionBody, radioGroup);		
 			}
 		});
-		
+
 		btnAppendQuestion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				index++;
@@ -117,6 +115,7 @@ public class TrueFalsePane extends JPanel {
 					tfAnswer = "F";
 				}
 				questionsTFGiftyList.append("//Question " + index + "\n" + localFormatter.buildT_FGifty(questionTitle.getText(), questionBody.getText(), tfAnswer) + "\n\n");
+				clearInput(questionTitle, questionBody, radioGroup);
 			}
 		});
 		
@@ -128,6 +127,12 @@ public class TrueFalsePane extends JPanel {
 			}
 		});
 
+	}
+	
+	private void clearInput(final JTextArea questionTitle, final JTextArea questionBody, final ButtonGroup radioGroup) {
+		questionTitle.setText("");
+		questionBody.setText("");
+		radioGroup.clearSelection();
 	}
 
 }
