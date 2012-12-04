@@ -87,10 +87,10 @@ public class TrueFalsePane extends JPanel {
 		JScrollPane scrollPane_2 = new JScrollPane();
 		add(scrollPane_2, "cell 1 5 3 1,grow");
 		
-		final JTextArea questionsGiftyList = new JTextArea();
-		questionsGiftyList.setBackground(SystemColor.control);
-		questionsGiftyList.setEditable(false);
-		scrollPane_2.setViewportView(questionsGiftyList);
+		final JTextArea questionsTFGiftyList = new JTextArea();
+		questionsTFGiftyList.setBackground(SystemColor.control);
+		questionsTFGiftyList.setEditable(false);
+		scrollPane_2.setViewportView(questionsTFGiftyList);
 		
 		JButton btnClearQuestionsList = new JButton("Clear Questions List");
 		add(btnClearQuestionsList, "cell 3 6,growx");
@@ -116,13 +116,13 @@ public class TrueFalsePane extends JPanel {
 				}else{
 					tfAnswer = "F";
 				}
-				questionsGiftyList.append("//Question " + index + " ********\n" + localFormatter.buildT_FGifty(questionTitle.getText(), questionBody.getText(), tfAnswer) + "\n\n");
+				questionsTFGiftyList.append("//Question " + index + "\n" + localFormatter.buildT_FGifty(questionTitle.getText(), questionBody.getText(), tfAnswer) + "\n\n");
 			}
 		});
 		
 		btnClearQuestionsList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				questionsGiftyList.setText("");
+				questionsTFGiftyList.setText("");
 				
 				index = 0;
 			}
