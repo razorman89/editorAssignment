@@ -29,6 +29,7 @@ public class EditorGui extends JFrame {
 	private MultipleChoicePaneAdv multiChoiceAdv;
 	private MultipleChoicePaneBas multiChoiceBas;
 	private MatchingPane matchingQuestion;
+	private BlanksPane fillBlanksQuestion;
 	private EssayPane essayQuestion;
 	private TrueFalsePane trueFalse;
 	public GiftFormatter EditorFormatter;
@@ -107,6 +108,7 @@ public class EditorGui extends JFrame {
 		tabbedPane.add("Multiple Choice Basic", createMultiChoiceQBas()); // create & add 
 		tabbedPane.add("Multiple Choice Advanced", createMultiChoiceQAdv()); // create & add 
 		tabbedPane.add("Matching", createMatchingQ()); // create & add 
+		tabbedPane.add("Fill the Blanks", createFillBlanksQ()); // create & add 
 
 		c.add(tabbedPane); // add tab to super in this case a JFrame
 		
@@ -118,6 +120,12 @@ public class EditorGui extends JFrame {
 		
 	}
 	
+	private JPanel createFillBlanksQ() {
+		fillBlanksQuestion = new BlanksPane(EditorFormatter);
+		return fillBlanksQuestion;
+		// TODO Auto-generated method stub
+	}
+
 	private JPanel createEssayQ() {
 		essayQuestion = new EssayPane(EditorFormatter);
 		return essayQuestion;
