@@ -1,6 +1,7 @@
 package editor1;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -28,6 +29,7 @@ public class EditorGui extends JFrame {
 	private JPanel contentPane;
 	private MultipleChoicePaneAdv multiChoiceAdv;
 	private MultipleChoicePaneBas multiChoiceBas;
+	private NumericalPane numericalQuestion;
 	private MatchingPane matchingQuestion;
 	private BlanksPane fillBlanksQuestion;
 	private EssayPane essayQuestion;
@@ -106,9 +108,10 @@ public class EditorGui extends JFrame {
 		tabbedPane.add("Essay", createEssayQ()); // create & add 
 		tabbedPane.add("True/False", createTrueFalseQ()); // create & add true/false frame
 		tabbedPane.add("Multiple Choice Basic", createMultiChoiceQBas()); // create & add 
-		tabbedPane.add("Multiple Choice Advanced", createMultiChoiceQAdv()); // create & add 
+		tabbedPane.add("Multiple Choice Advanced", createMultiChoiceQAdv()); // create & add
+		tabbedPane.add("Numerical", createNumericalQ()); // create & add 
 		tabbedPane.add("Matching", createMatchingQ()); // create & add 
-		tabbedPane.add("Fill the Blanks", createFillBlanksQ()); // create & add 
+		tabbedPane.add("Fill Blanks", createFillBlanksQ()); // create & add 
 
 		c.add(tabbedPane); // add tab to super in this case a JFrame
 		
@@ -120,6 +123,11 @@ public class EditorGui extends JFrame {
 		
 	}
 	
+	private Component createNumericalQ() {
+		numericalQuestion = new NumericalPane(EditorFormatter);
+		return numericalQuestion;
+	}
+
 	private JPanel createFillBlanksQ() {
 		fillBlanksQuestion = new BlanksPane(EditorFormatter);
 		return fillBlanksQuestion;

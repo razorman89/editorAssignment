@@ -198,7 +198,6 @@ public class BlanksPane extends JPanel {
 		for (int ii = 0; ii < blankFields.size(); ii++) {
 			blankFields.get(ii).setText("");
 		}
-		// TODO Auto-generated method stub	
 	}
 
 }
