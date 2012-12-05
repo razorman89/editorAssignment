@@ -1,7 +1,6 @@
 package editor1;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -30,6 +29,7 @@ public class EditorGui extends JFrame {
 	private MultipleChoicePaneAdv multiChoiceAdv;
 	private MultipleChoicePaneBas multiChoiceBas;
 	private MatchingPane matchingQuestion;
+	private EssayPane essayQuestion;
 	private TrueFalsePane trueFalse;
 	public GiftFormatter EditorFormatter;
 	ExitAction exitAction;
@@ -102,19 +102,14 @@ public class EditorGui extends JFrame {
 		
 		// create tabbed pane & add tabs
 		JTabbedPane tabbedPane = new JTabbedPane();
+		tabbedPane.add("Essay", createEssayQ()); // create & add 
 		tabbedPane.add("True/False", createTrueFalseQ()); // create & add true/false frame
-		tabbedPane.add("Multiple Choice Advanced", createMultiChoiceQAdv()); // create & add 
 		tabbedPane.add("Multiple Choice Basic", createMultiChoiceQBas()); // create & add 
+		tabbedPane.add("Multiple Choice Advanced", createMultiChoiceQAdv()); // create & add 
 		tabbedPane.add("Matching", createMatchingQ()); // create & add 
-		
+
 		c.add(tabbedPane); // add tab to super in this case a JFrame
 		
-		// ## add some test tabs
-//		testTabs(tabbedPane);
-
-		// register for windowClosing event in case user
-		// does not select Exit from File menu to terminate
-		// application
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent event) {
 				shutDown();
@@ -123,6 +118,12 @@ public class EditorGui extends JFrame {
 		
 	}
 	
+	private JPanel createEssayQ() {
+		essayQuestion = new EssayPane(EditorFormatter);
+		return essayQuestion;
+		// TODO Auto-generated method stub
+	}
+
 	private JPanel createMatchingQ() {
 		matchingQuestion = new MatchingPane(EditorFormatter);
 		return matchingQuestion;
@@ -146,19 +147,6 @@ public class EditorGui extends JFrame {
 		return trueFalse;
 		// TODO Auto-generated method stub
 	}
-
-//	private void testTabs(JTabbedPane tabbedPane) {
-//		ArrayList<JComponent> tabs = new ArrayList<JComponent>();
-//		tabs.add(makeTextPanel("TEST PANEL #1"));
-//		tabs.add(makeTextPanel("TEST PANEL #2"));
-//		tabs.add(makeTextPanel("TEST PANEL #3"));
-//		tabs.add(makeTextPanel("TEST PANEL #4"));
-//		
-//		for (int ii = 0; ii < 4; ii++) {
-//			tabbedPane.addTab("Tab " + (ii + 1), null, tabs.get(ii), "Test Tab " + ii);
-//		}
-//        
-//	}
 	
     protected JComponent makeTextPanel(String text) {
         JPanel panel = new JPanel(false);

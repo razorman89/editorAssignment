@@ -98,6 +98,14 @@ public class GiftFormatter {
 		return matchQAsQuestion;
 	}	
 	
+	public String buildEssayGifty(String qTitle, String qBody) {
+		qTitle = stringConverter(qTitle);
+		qBody = stringConverter(qBody);
+		
+		String essayQuestion = ("::" + qTitle + "::" + qBody + "{}");;
+		return essayQuestion;
+	}
+	
 	private String stringConverter(String string){
 		
 		string = string.replace("~", "\\~");

@@ -29,7 +29,7 @@ public class TrueFalsePane extends JPanel {
 	public TrueFalsePane(GiftFormatter editorFormatter) {
 		
 		this.localFormatter = editorFormatter;
-		setLayout(new MigLayout("", "[79.00][56.00][grow][]", "[][71.00,grow][][40.00][12.00][79.00,grow][][]"));
+		setLayout(new MigLayout("", "[79.00][56.00][grow][]", "[][71.00,grow][][40.00][10][79.00,grow][][]"));
 		
 		JLabel lblQuestionTitle = new JLabel("Question Title:");
 		add(lblQuestionTitle, "cell 0 0,alignx right,aligny top");
