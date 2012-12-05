@@ -161,23 +161,48 @@ public class MatchingPane extends JPanel {
 		btnDeleteSelected.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ArrayList<Integer> removes = new ArrayList<Integer>();
+				int temp = removes.size();
+				
+				/*
+				 * Find which checkboxes are selected
+				 */
 				for (int ii = 0; ii < checkBoxs.size(); ii++) {
-					if(checkBoxs.get(ii).isSelected()){
+					if(checkBoxs.get(ii).isSelected() == true){
 						removes.add(ii);
 					}
 				}
-//				System.out.println("\n-------------------------\n" + "ANSWERS :" + answerFields.size() + "\nQUESTIONS :" + 
-//						questionsFields.size() + "\nREMOVES :" + removes.size()+"\n-------------------------\n");
 				
-				for (int jj = 0; jj < removes.size(); jj++) {
-					answersPanel.remove(answerFields.get(removes.get(jj).intValue()));
-					answersPanel.remove(questionFields.get(removes.get(jj).intValue()));
-					answersPanel.remove(checkBoxs.get(removes.get(jj).intValue()));
-					answerFields.remove(removes.get(jj).intValue());
-					questionFields.remove(removes.get(jj).intValue());
-					checkBoxs.remove(removes.get(jj).intValue());
+//				System.out.println("ITEMS PENDING REMOVAL: " + removes);
+//				System.out.println("\nBEFORE REMOVES\n-----------------------##\n" + "ANSWERS :" + answerFields.size() + "\nQUESTIONS :" + 
+//						questionFields.size() + "\nREMOVES :" + removes.size()+"\n-------------------------\n");
+				/*
+				 * Loop backwards through all gui components removing selected components
+				 */
+				for (int jj = temp-1; jj >= 0; jj--) {
+					answersPanel.remove(answerFields.get(removes.get(jj)));
+					answersPanel.remove(questionFields.get(removes.get(jj)));
+					answersPanel.remove(checkBoxs.get(removes.get(jj)));
+					removes.remove(jj);
 				}
-				answersPanel.updateUI();			
+				answersPanel.updateUI();
+				
+				/*
+				 * Loop backwards through all data fields removing selected fields
+				 */
+				temp = answerFields.size();
+				ArrayList<JCheckBox> temp2 = checkBoxs;
+				for (int i = temp-1; i >= 0; i--) {
+					System.out.println("RUN");
+					if (temp2.get(i).isSelected() == true){
+						System.out.println("REMOVING: " + i);
+						answerFields.remove(i);
+						questionFields.remove(i);
+						checkBoxs.remove(i);
+					}
+					
+				}
+//				System.out.println("\nAFTER REMOVES\n-----------------------##\n" + "ANSWERS :" + answerFields.size() + "\nQUESTIONS :" + 
+//						questionFields.size() + "\nREMOVES :" + removes.size()+"\n-------------------------\n");
 			}
 		});
 		
