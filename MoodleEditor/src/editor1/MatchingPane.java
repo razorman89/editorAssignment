@@ -113,8 +113,8 @@ public class MatchingPane extends JPanel {
 		JButton button = new JButton("Clear Question Text");
 		add(button, "cell 3 2,growx");
 		
-		JButton button_1 = new JButton("Append Question ");
-		add(button_1, "cell 3 3,growx,aligny top");
+		JButton btnCreateGifty = new JButton("Create Gift Code");
+		add(btnCreateGifty, "cell 3 3,growx,aligny top");
 		
 		JSeparator separator = new JSeparator();
 		add(separator, "cell 1 4 3 1,grow");
@@ -161,7 +161,6 @@ public class MatchingPane extends JPanel {
 		btnDeleteSelected.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ArrayList<Integer> removes = new ArrayList<Integer>();
-				int temp = removes.size();
 				
 				/*
 				 * Find which checkboxes are selected
@@ -172,12 +171,13 @@ public class MatchingPane extends JPanel {
 					}
 				}
 				
-//				System.out.println("ITEMS PENDING REMOVAL: " + removes);
-//				System.out.println("\nBEFORE REMOVES\n-----------------------##\n" + "ANSWERS :" + answerFields.size() + "\nQUESTIONS :" + 
-//						questionFields.size() + "\nREMOVES :" + removes.size()+"\n-------------------------\n");
+				System.out.println("ITEMS PENDING REMOVAL: " + removes);
+				System.out.println("\nBEFORE REMOVES\n-----------------------##\n" + "ANSWERS :" + answerFields.size() + "\nQUESTIONS :" + 
+						questionFields.size() + "\nREMOVES :" + removes.size()+"\n-------------------------\n");
 				/*
 				 * Loop backwards through all gui components removing selected components
 				 */
+				int temp = removes.size();
 				for (int jj = temp-1; jj >= 0; jj--) {
 					answersPanel.remove(answerFields.get(removes.get(jj)));
 					answersPanel.remove(questionFields.get(removes.get(jj)));
@@ -201,8 +201,8 @@ public class MatchingPane extends JPanel {
 					}
 					
 				}
-//				System.out.println("\nAFTER REMOVES\n-----------------------##\n" + "ANSWERS :" + answerFields.size() + "\nQUESTIONS :" + 
-//						questionFields.size() + "\nREMOVES :" + removes.size()+"\n-------------------------\n");
+				System.out.println("\nAFTER REMOVES\n-----------------------##\n" + "ANSWERS :" + answerFields.size() + "\nQUESTIONS :" + 
+						questionFields.size() + "\nREMOVES :" + removes.size()+"\n-------------------------\n");
 			}
 		});
 		
@@ -212,7 +212,7 @@ public class MatchingPane extends JPanel {
 			}
 		});
 		
-		button_1.addActionListener(new ActionListener() {
+		btnCreateGifty.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				index++;
 				questionsList.append("//Question " + index + "\n" + localFormatter.buildMatchQAs(questionTitle.getText(),questionFields, answerFields) + "\n\n");

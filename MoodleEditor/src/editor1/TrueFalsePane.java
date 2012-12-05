@@ -74,9 +74,9 @@ public class TrueFalsePane extends JPanel {
 
 		add(btnClearText, "cell 3 2,growx");
 		
-		JButton btnAppendQuestion = new JButton("Append Question ");
+		JButton btnCreateGifty = new JButton("Create Gift Code");
 
-		add(btnAppendQuestion, "cell 3 3,growx,aligny top");
+		add(btnCreateGifty, "cell 3 3,growx,aligny top");
 		
 		JSeparator separator_3 = new JSeparator();
 		add(separator_3, "cell 1 4 3 1,grow");
@@ -106,7 +106,7 @@ public class TrueFalsePane extends JPanel {
 			}
 		});
 
-		btnAppendQuestion.addActionListener(new ActionListener() {
+		btnCreateGifty.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				index++;
 				if(rdbtnTrue.isSelected() == true){

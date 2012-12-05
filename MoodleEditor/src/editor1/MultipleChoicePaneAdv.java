@@ -117,8 +117,8 @@ public class MultipleChoicePaneAdv extends JPanel {
 		JButton btnClearText = new JButton("Clear Question Text");
 		add(btnClearText, "cell 5 5 2 1,growx,aligny top");
 
-		JButton btnAppendQuestion = new JButton("Append Question");
-		add(btnAppendQuestion, "cell 5 6 2 1,growx,aligny top");
+		JButton btnCreateGifty = new JButton("Create Gift Code");
+		add(btnCreateGifty, "cell 5 6 2 1,growx,aligny top");
 		
 		JSeparator separator = new JSeparator();
 		add(separator, "cell 2 7 5 1,grow");
@@ -186,7 +186,7 @@ public class MultipleChoicePaneAdv extends JPanel {
 			}
 		});
 		
-		btnAppendQuestion.addActionListener(new ActionListener() {
+		btnCreateGifty.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				index++;
 				questionsMultiAdvGiftyList.append("//Question " + index + "\n" + localFormatter.buildMultiChoiceAdv(questionTitle.getText(), questionBody.getText(), answerFields, feedbackFields, answerSpinners) + "\n\n");

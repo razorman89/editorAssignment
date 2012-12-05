@@ -106,6 +106,28 @@ public class GiftFormatter {
 		return essayQuestion;
 	}
 	
+	public String buildBlanksQ(String qTitle, String qStart, String qEnd, ArrayList<JTextField> blankFields, ArrayList<JRadioButton> correctFields) {
+		qTitle = stringConverter(qTitle);
+		qStart = stringConverter(qStart);
+		qEnd = stringConverter(qEnd);
+		
+		for (int jj = 0; jj < blankFields.size(); jj++) {
+			String blankHolder = stringConverter(blankFields.get(jj).getText());
+			blankFields.get(jj).setText(blankHolder);			
+		}
+		
+		String blanksQuestion = ("::" + qTitle + "::" + qStart + " {");
+		for (int ii = 0; ii < blankFields.size(); ii++) {
+			if(correctFields.get(ii).isSelected()){
+				blanksQuestion += (" =" + blankFields.get(ii).getText());
+			}else{
+				blanksQuestion += (" ~" + blankFields.get(ii).getText());
+			}
+		}
+		blanksQuestion += ("} " + qEnd);
+		return blanksQuestion;
+	}
+	
 	private String stringConverter(String string){
 		
 		string = string.replace("~", "\\~");
@@ -117,5 +139,7 @@ public class GiftFormatter {
 		
 		return string;
 	}
+
+
 
 }
