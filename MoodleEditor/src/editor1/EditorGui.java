@@ -21,6 +21,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JToolBar;
@@ -241,7 +242,8 @@ public class EditorGui extends JFrame {
 			sb.append(matchingQuestion.getQuestionList());
 			sb.append(fillBlanksQuestion.getQuestionList());
 			
-			File file = new File(savePath());
+			String filePath = savePath();
+			File file = new File(filePath);
 			
 			try {
 				PrintWriter wr = new PrintWriter(file);
@@ -249,10 +251,10 @@ public class EditorGui extends JFrame {
 				wr.flush();
 				wr.close();
 			} catch (FileNotFoundException e) {
-				System.out.println("ERROR WRITTING / CREATING FILE...");
+				JOptionPane.showMessageDialog(null, "Error Saving File!\nFile Path: " + filePath, "Gifty Editor Output Information", JOptionPane.ERROR_MESSAGE);
 				e.printStackTrace();
 			}
-			
+			JOptionPane.showMessageDialog(null, "File Saved Successfully!\nFile Path: " + filePath, "Gifty Editor Output Information", JOptionPane.INFORMATION_MESSAGE);
 			System.out.println("FILE SAVED AT: " + file.getAbsolutePath());
 		}
 		

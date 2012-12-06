@@ -180,6 +180,7 @@ public class GiftFormatter {
 		string = string.replace("}", "\\}");
 		string = string.replace("=", "\\=");
 		string = string.replace("#", "\\#");
+		string = string.replace("%", "\\%");
 		
 		return string;
 	}
