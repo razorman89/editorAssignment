@@ -232,14 +232,14 @@ public class EditorGui extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			StringBuilder sb = new StringBuilder();
-			sb.append(multiChoiceAdv.getQuestionList());
+			StringBuilder sb = new StringBuilder();			
+			sb.append(essayQuestion.getQuestionList());
+			sb.append(trueFalse.getQuestionList());
 			sb.append(multiChoiceBas.getQuestionList());
+			sb.append(multiChoiceAdv.getQuestionList());
 			sb.append(numericalQuestion.getQuestionList());
 			sb.append(matchingQuestion.getQuestionList());
 			sb.append(fillBlanksQuestion.getQuestionList());
-			sb.append(essayQuestion.getQuestionList());
-			sb.append(trueFalse.getQuestionList());
 			
 			File file = new File(savePath());
 			
