@@ -26,7 +26,6 @@ public class MatchingPane extends JPanel {
 	private ArrayList<JTextField> answerFields = new ArrayList<JTextField>();
 	private ArrayList<JTextField> questionFields = new ArrayList<JTextField>();
 	private ArrayList<JCheckBox> checkBoxs = new ArrayList<JCheckBox>();
-	private int index = 0;
 	private final JTextArea questionsList;
 
 	/**
@@ -36,7 +35,7 @@ public class MatchingPane extends JPanel {
 	public MatchingPane(GiftFormatter editorFormatter) {
 		
 		this.localFormatter = editorFormatter;
-		setLayout(new MigLayout("", "[][150.00][242.00,grow][119.00]", "[][170.00][][40][14.00][79.00,grow][][]"));
+		setLayout(new MigLayout("", "[][150.00][242.00,grow][119.00]", "[][170.00][][40][14.00][79.00,grow][]"));
 		
 		JLabel lblQuestionTitle = new JLabel("Question Title:");
 		add(lblQuestionTitle, "cell 0 0,alignx right,aligny top");
@@ -134,9 +133,6 @@ public class MatchingPane extends JPanel {
 		JButton button_2 = new JButton("Clear Questions List");
 		add(button_2, "cell 3 6,growx");
 		
-		JButton button_3 = new JButton("Add Questions to File");
-		add(button_3, "cell 3 7,growx");
-		
 		
 		btnAddQa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -215,8 +211,7 @@ public class MatchingPane extends JPanel {
 		
 		btnCreateGifty.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				index++;
-				questionsList.append("//Question " + index + "\n" + localFormatter.buildMatchQAs(questionTitle.getText(),questionFields, answerFields) + "\n\n");
+				questionsList.append(localFormatter.buildMatchQAs(questionTitle.getText(),questionFields, answerFields) + "\n\n");
 				clearInputs(questionTitle);
 			}
 		});

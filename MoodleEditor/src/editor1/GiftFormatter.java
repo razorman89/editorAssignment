@@ -128,13 +128,9 @@ public class GiftFormatter {
 		return blanksQuestion;
 	}
 	
-	
-	
-	
-	public String buildNumRange_1(String qTitle, String qBody, JTextField answerFields, JTextField feedbackFields, double rangeStart) {
+	public String buildNumRange_1(String qTitle, String qBody, JTextField answerFields, JTextField feedbackFields, Object rangeStart) {
 		qTitle = stringConverter(qTitle);
 		qBody = stringConverter(qBody);
-		double qRange = rangeStart;
 		
 		String answerHolder = stringConverter(answerFields.getText());
 		answerFields.setText(answerHolder);		
@@ -143,43 +139,21 @@ public class GiftFormatter {
 		feedbackFields.setText(feedbackHolder);
 		
 		String numRange_1Question = ("::" + qTitle + "::" + qBody + " {");
-		numRange_1Question += ("#" + answerFields.getText() + ":" + qRange); 
+		numRange_1Question += ("#" + answerFields.getText() + ":" + rangeStart); 
 		numRange_1Question += ("}");
 		
 		return numRange_1Question;
 	}
 
-	public String buildNumRange_2(String qTitle, String qBody, double rangeStart, double rangeEnd) {
+	public String buildNumRange_2(String qTitle, String qBody, Object rangeStart, Object rangeEnd) {
 		qTitle = stringConverter(qTitle);
 		qBody = stringConverter(qBody);
-		double qRangeStart = rangeStart;
-		double qRangeEnd = rangeEnd;
 		
-		String numRange_2Question = ("::" + qTitle + "::" + qBody + " {#" + qRangeStart + ".." + qRangeEnd + "}");
+		String numRange_2Question = ("::" + qTitle + "::" + qBody + " {#" + rangeStart + ".." + rangeEnd + "}");
 		return numRange_2Question;
 	}
-
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	public String buildNumRange_3(String qTitle, String qBody, JTextField answerFields, JTextField feedbackFields, double qRange, int rangeMark) {
+	public String buildNumRange_3(String qTitle, String qBody, JTextField answerFields, JTextField feedbackFields, Object qRange, Object rangeMark) {
 		qTitle = stringConverter(qTitle);
 		qBody = stringConverter(qBody);
 		
@@ -197,31 +171,6 @@ public class GiftFormatter {
 		numRange_3Question += ("\n}");
 		return numRange_3Question;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	private String stringConverter(String string){
 		

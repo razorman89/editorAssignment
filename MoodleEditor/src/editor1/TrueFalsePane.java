@@ -20,7 +20,6 @@ public class TrueFalsePane extends JPanel {
 	
 	private GiftFormatter localFormatter;
 	private String tfAnswer;
-	private int index = 0;
 	private final JTextArea questionsList;
 
 	/**
@@ -30,7 +29,7 @@ public class TrueFalsePane extends JPanel {
 	public TrueFalsePane(GiftFormatter editorFormatter) {
 		
 		this.localFormatter = editorFormatter;
-		setLayout(new MigLayout("", "[79.00][56.00][grow][]", "[][71.00,grow][][40.00][10][79.00,grow][][]"));
+		setLayout(new MigLayout("", "[79.00][56.00][grow][]", "[][71.00,grow][][40.00][10][79.00,grow][]"));
 		
 		JLabel lblQuestionTitle = new JLabel("Question Title:");
 		add(lblQuestionTitle, "cell 0 0,alignx right,aligny top");
@@ -96,9 +95,6 @@ public class TrueFalsePane extends JPanel {
 		JButton btnClearQuestionsList = new JButton("Clear Questions List");
 		add(btnClearQuestionsList, "cell 3 6,growx");
 		
-		JButton btnAddQuestionsTo = new JButton("Add Questions to File");
-		add(btnAddQuestionsTo, "cell 3 7,growx,aligny top");
-		
 		
 		
 		btnClearText.addActionListener(new ActionListener() {
@@ -109,13 +105,12 @@ public class TrueFalsePane extends JPanel {
 
 		btnCreateGifty.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				index++;
 				if(rdbtnTrue.isSelected() == true){
 					tfAnswer = "T";
 				}else{
 					tfAnswer = "F";
 				}
-				questionsList.append("//Question " + index + "\n" + localFormatter.buildT_FGifty(questionTitle.getText(), questionBody.getText(), tfAnswer) + "\n\n");
+				questionsList.append(localFormatter.buildT_FGifty(questionTitle.getText(), questionBody.getText(), tfAnswer) + "\n\n");
 				clearInput(questionTitle, questionBody, radioGroup);
 			}
 		});
@@ -123,8 +118,6 @@ public class TrueFalsePane extends JPanel {
 		btnClearQuestionsList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				questionsList.setText("");
-				
-				index = 0;
 			}
 		});
 

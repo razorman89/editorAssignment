@@ -14,7 +14,6 @@ import java.awt.event.ActionEvent;
 @SuppressWarnings("serial")
 public class EssayPane extends JPanel {
 	private GiftFormatter localFormatter;
-	private int index = 0;
 	private final JTextArea questionsList;
 
 	/**
@@ -23,7 +22,7 @@ public class EssayPane extends JPanel {
 	public EssayPane(GiftFormatter editorFormatter) {
 		
 		this.localFormatter = editorFormatter;
-		setLayout(new MigLayout("", "[][grow][][]", "[][71.00,grow][][40][10][79.00,grow][][]"));
+		setLayout(new MigLayout("", "[][grow][][]", "[][71.00,grow][][40][10][79.00,grow][]"));
 		
 		JLabel lblQuestionTitle = new JLabel("Question Title:");
 		add(lblQuestionTitle, "cell 0 0,alignx right,aligny top");
@@ -66,9 +65,6 @@ public class EssayPane extends JPanel {
 		JButton btnClearQuestionsList = new JButton("Clear Questions List");
 		add(btnClearQuestionsList, "cell 3 6,growx");
 		
-		JButton button_3 = new JButton("Add Questions to File");
-		add(button_3, "cell 3 7,growx");
-		
 		
 		btnClearText.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -79,8 +75,7 @@ public class EssayPane extends JPanel {
 		
 		btnCreateGifty.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				index++;
-				questionsList.append("//Question " + index + "\n" + localFormatter.buildEssayGifty(questionTitle.getText(), questionBody.getText()) + "\n\n");
+				questionsList.append(localFormatter.buildEssayGifty(questionTitle.getText(), questionBody.getText()) + "\n\n");
 				questionTitle.setText("");
 				questionBody.setText("");
 			}
@@ -89,7 +84,6 @@ public class EssayPane extends JPanel {
 		btnClearQuestionsList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				questionsList.setText("");
-				index = 0;
 			}
 		});
 

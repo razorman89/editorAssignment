@@ -27,10 +27,7 @@ public class MultipleChoicePaneBas extends JPanel {
 	private ArrayList<JRadioButton> radioSelectors = new ArrayList<JRadioButton>();
 	private Dimension radioDimension = new Dimension(0, 28);
 	private int rowCount = 1;
-	private int index = 0;
 	private final JTextArea questionsList;
-//	private SpinnerNumberModel rangeSpinnerModel = new SpinnerNumberModel(0, 0, 1000.0, 0.001);
-//	private SpinnerNumberModel percentageSpinnerModel = new SpinnerNumberModel(0, 0, 100, 1);
 
 	/**
 	 * Create the panel.
@@ -39,7 +36,7 @@ public class MultipleChoicePaneBas extends JPanel {
 	public MultipleChoicePaneBas(GiftFormatter editorFormatter) {
 		
 		this.localFormatter = editorFormatter;
-		setLayout(new MigLayout("", "[31.00][][16.00][grow][grow][47.00][]", "[][grow][][][170][][33.00][12.00][79.00,grow][][26.00]"));
+		setLayout(new MigLayout("", "[31.00][][16.00][grow][grow][47.00][]", "[][grow][][][170][][33.00][12.00][79.00,grow][]"));
 		
 		JLabel lblQuestionTitle = new JLabel("Question Title:");
 		add(lblQuestionTitle, "cell 0 0,alignx right,aligny top");
@@ -148,9 +145,6 @@ public class MultipleChoicePaneBas extends JPanel {
 		JButton btnClearQuestionsList = new JButton("Clear Questions List");
 		add(btnClearQuestionsList, "cell 5 9 2 1,growx");
 		
-		JButton btnAddQuestions = new JButton("Add Questions to File");
-		add(btnAddQuestions, "cell 5 10 2 1,growx");
-		
 		
 		btnNewAnswer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -200,8 +194,7 @@ public class MultipleChoicePaneBas extends JPanel {
 		
 		btnCreateGifty.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				index++;
-				questionsList.append("//Question " + index + "\n" + localFormatter.buildMultiChoiceBas(questionTitle.getText(), questionBody.getText(), answerFields, feedbackFields, radioSelectors) + "\n\n");
+				questionsList.append(localFormatter.buildMultiChoiceBas(questionTitle.getText(), questionBody.getText(), answerFields, feedbackFields, radioSelectors) + "\n\n");
 				clearInput(questionTitle, questionBody, radioGroup);
 			}
 		});
@@ -209,7 +202,6 @@ public class MultipleChoicePaneBas extends JPanel {
 		btnClearQuestionsList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				questionsList.setText("");
-				index = 0;
 			}
 		});
 

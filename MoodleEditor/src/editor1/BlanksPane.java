@@ -24,7 +24,6 @@ public class BlanksPane extends JPanel {
 	private ArrayList<JTextField> blankFields = new ArrayList<JTextField>();
 	private ArrayList<JRadioButton> correctFields = new ArrayList<JRadioButton>();
 	private int rowCount = 0;
-	private int index = 0;
 	private Dimension radioDimension = new Dimension(0, 28);
 	private final JTextArea questionsList;
 
@@ -35,7 +34,7 @@ public class BlanksPane extends JPanel {
 	public BlanksPane(GiftFormatter editorFormatter) {
 		
 		this.localFormatter = editorFormatter;
-		setLayout(new MigLayout("", "[][grow][130][]", "[][30.00,grow][170][][30,grow][][40][10][79.00,grow][27.00][26.00]"));
+		setLayout(new MigLayout("", "[][grow][130][]", "[][30.00,grow][170][][30,grow][][40][10][79.00,grow][27.00]"));
 		
 		JLabel lblQuestionTitle = new JLabel("Question Title:");
 		add(lblQuestionTitle, "cell 0 0,alignx right,aligny top");
@@ -129,9 +128,6 @@ public class BlanksPane extends JPanel {
 		JButton btnClearQuestionsList = new JButton("Clear Questions List");
 		add(btnClearQuestionsList, "cell 3 9,growx");
 		
-		JButton button_3 = new JButton("Add Questions to File");
-		add(button_3, "cell 3 10,growx");
-		
 		
 		btnAddBlank.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -174,8 +170,7 @@ public class BlanksPane extends JPanel {
 		
 		btnCreateGifty.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				index++;
-				questionsList.append("//Question " + index + "\n" + localFormatter.buildBlanksQ(questionTitle.getText(), questionStart.getText(), questionEnd.getText(), blankFields, correctFields) + "\n\n");
+				questionsList.append(localFormatter.buildBlanksQ(questionTitle.getText(), questionStart.getText(), questionEnd.getText(), blankFields, correctFields) + "\n\n");
 				clearInput(questionTitle, questionStart, questionEnd, blankFields, correctFields, radioGroup);
 			}
 		});

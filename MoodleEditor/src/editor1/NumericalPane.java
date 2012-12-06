@@ -26,8 +26,6 @@ public class NumericalPane extends JPanel {
 	private JTextField feedbackFields;
 	private final JTextArea questionsList;
 	private String[] options = {"-- Select Type --", "Answer (+/-) Set Range", "Answer Within Set Range", "Muliple Answers Within Range & Partial Credit"};
-	///HERE
-	private int index = 0;
 	private SpinnerNumberModel rangeStartModel = new SpinnerNumberModel(0, 0, 1000.0, 0.001);
 	private SpinnerNumberModel rangeEndModel = new SpinnerNumberModel(0, 0, 1000.0, 0.001);
 	private SpinnerNumberModel normalModel = new SpinnerNumberModel(0, 0, 100, 1);
@@ -40,7 +38,7 @@ public class NumericalPane extends JPanel {
 	public NumericalPane(GiftFormatter editorFormatter) {
 		
 		this.localFormatter = editorFormatter;
-		setLayout(new MigLayout("", "[31.00][83.00][400,grow][][84.00]", "[][][grow][][][][10][79.00,grow][][26.00]"));
+		setLayout(new MigLayout("", "[31.00][83.00][400,grow][][84.00]", "[][][grow][][][][10][79.00,grow][]"));
 		
 		JLabel lblQuestionType = new JLabel("Question Type:");
 		add(lblQuestionType, "cell 0 0,alignx right,aligny top");
@@ -149,9 +147,6 @@ public class NumericalPane extends JPanel {
 		
 		JButton btnClearQuestionsList = new JButton("Clear Questions List");
 		add(btnClearQuestionsList, "cell 4 8,growx");
-		
-		JButton btnAddQuestions = new JButton("Add Questions to File");
-		add(btnAddQuestions, "cell 4 9,growx");
 
 		
 		questionTypes.addActionListener(new ActionListener() {
@@ -192,6 +187,7 @@ public class NumericalPane extends JPanel {
 					lblRangeEnd.setText("Range End: ");
 					SpinnerNumberModel rangeEndModel = new SpinnerNumberModel(0, 0, 1000.0, 0.001);
 					rangeEnd.setModel(rangeEndModel);
+					rangeEnd.setEnabled(true);
 					
 					break;
 					
@@ -229,19 +225,18 @@ public class NumericalPane extends JPanel {
 					
 		btnCreateGifty.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				index++;
 				switch (questionTypes.getSelectedIndex()) {
 					
 				case 1:
-					questionsList.append("//Question " + index + ", Type '" + options[1] + "'\n" + localFormatter.buildNumRange_1(questionTitle.getText(), questionBody.getText(), answerFields, feedbackFields, (Double) rangeStart.getValue()) + "\n\n");
+					questionsList.append("//Question Type '" + options[1] + "'\n" + localFormatter.buildNumRange_1(questionTitle.getText(), questionBody.getText(), answerFields, feedbackFields, rangeStart.getValue()) + "\n\n");
 					break;
 					
 				case 2:
-					questionsList.append("//Question " + index + ", Type '" + options[2] + "'\n" + localFormatter.buildNumRange_2(questionTitle.getText(), questionBody.getText(), (Double) rangeStart.getValue(), (Double) rangeEnd.getValue()) + "\n\n");
+					questionsList.append("//Question Type '" + options[2] + "'\n" + localFormatter.buildNumRange_2(questionTitle.getText(), questionBody.getText(), rangeStart.getValue(), rangeEnd.getValue()) + "\n\n");
 					break;
 					
 				case 3:
-					questionsList.append("//Question " + index + ", Type '" + options[3] + "'\n" + localFormatter.buildNumRange_3(questionTitle.getText(), questionBody.getText(), answerFields, feedbackFields, (Double) rangeStart.getValue(), (Integer) rangeEnd.getValue()) + "\n\n");
+					questionsList.append("//Question Type '" + options[3] + "'\n" + localFormatter.buildNumRange_3(questionTitle.getText(), questionBody.getText(), answerFields, feedbackFields, rangeStart.getValue(), rangeEnd.getValue()) + "\n\n");
 					break;
 
 				default:
@@ -254,7 +249,6 @@ public class NumericalPane extends JPanel {
 		btnClearQuestionsList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				questionsList.setText("");
-				index = 0;
 			}
 		});
 	}
