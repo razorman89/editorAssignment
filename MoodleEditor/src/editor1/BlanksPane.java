@@ -12,9 +12,6 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
-
-import com.sun.org.apache.bcel.internal.generic.BALOAD;
-
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -29,6 +26,7 @@ public class BlanksPane extends JPanel {
 	private int rowCount = 0;
 	private int index = 0;
 	private Dimension radioDimension = new Dimension(0, 28);
+	private final JTextArea questionsList;
 
 	/**
 	 * Create the panel.
@@ -123,7 +121,7 @@ public class BlanksPane extends JPanel {
 		JScrollPane scrollPane_4 = new JScrollPane();
 		add(scrollPane_4, "cell 1 8 3 1,grow");
 		
-		final JTextArea questionsList = new JTextArea();
+		questionsList = new JTextArea();
 		questionsList.setBackground(SystemColor.control);
 		questionsList.setEditable(false);
 		scrollPane_4.setViewportView(questionsList);
@@ -198,6 +196,13 @@ public class BlanksPane extends JPanel {
 		for (int ii = 0; ii < blankFields.size(); ii++) {
 			blankFields.get(ii).setText("");
 		}
+	}
+	
+	public String getQuestionList() {
+		String list = questionsList.getText();
+		questionsList.setText("");
+		return list;
+
 	}
 
 }

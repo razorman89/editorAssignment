@@ -24,6 +24,7 @@ public class MultipleChoicePaneAdv extends JPanel {
 	private ArrayList<JSpinner> answerSpinners = new ArrayList<JSpinner>();
 	private int rowCount = 1;
 	private int index = 0;
+	private final JTextArea questionsList;
 //	private SpinnerNumberModel rangeSpinnerModel = new SpinnerNumberModel(0, 0, 1000.0, 0.001);
 //	private SpinnerNumberModel percentageSpinnerModel = new SpinnerNumberModel(0, 0, 100, 1);
 
@@ -129,10 +130,10 @@ public class MultipleChoicePaneAdv extends JPanel {
 		JScrollPane scrollPane_2 = new JScrollPane();
 		add(scrollPane_2, "cell 2 8 5 1,grow");
 		
-		final JTextArea questionsMultiAdvGiftyList = new JTextArea();
-		questionsMultiAdvGiftyList.setEditable(false);
-		questionsMultiAdvGiftyList.setBackground(SystemColor.control);
-		scrollPane_2.setViewportView(questionsMultiAdvGiftyList);
+		questionsList = new JTextArea();
+		questionsList.setEditable(false);
+		questionsList.setBackground(SystemColor.control);
+		scrollPane_2.setViewportView(questionsList);
 		
 		JButton btnClearQuestionsList = new JButton("Clear Questions List");
 		add(btnClearQuestionsList, "cell 5 9 2 1,growx");
@@ -189,14 +190,14 @@ public class MultipleChoicePaneAdv extends JPanel {
 		btnCreateGifty.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				index++;
-				questionsMultiAdvGiftyList.append("//Question " + index + "\n" + localFormatter.buildMultiChoiceAdv(questionTitle.getText(), questionBody.getText(), answerFields, feedbackFields, answerSpinners) + "\n\n");
+				questionsList.append("//Question " + index + "\n" + localFormatter.buildMultiChoiceAdv(questionTitle.getText(), questionBody.getText(), answerFields, feedbackFields, answerSpinners) + "\n\n");
 				clearInput(questionTitle, questionBody);
 			}
 		});
 		
 		btnClearQuestionsList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				questionsMultiAdvGiftyList.setText("");
+				questionsList.setText("");
 				index = 0;
 			}
 		});
@@ -212,6 +213,13 @@ public class MultipleChoicePaneAdv extends JPanel {
 			answerSpinners.get(ii).setValue(0);
 			
 		}
+	}
+	
+	public String getQuestionList() {
+		String list = questionsList.getText();
+		questionsList.setText("");
+		return list;
+
 	}
 
 }

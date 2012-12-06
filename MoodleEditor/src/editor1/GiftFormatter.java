@@ -131,59 +131,97 @@ public class GiftFormatter {
 	
 	
 	
-	public String buildNumRange_1(String qTitle, String qBody, ArrayList<JTextField> answerFields, ArrayList<JTextField> feedbackFields, String rangeStart) {
+	public String buildNumRange_1(String qTitle, String qBody, JTextField answerFields, JTextField feedbackFields, double rangeStart) {
 		qTitle = stringConverter(qTitle);
 		qBody = stringConverter(qBody);
-		double qRange = Double.parseDouble(rangeStart);
+		double qRange = rangeStart;
 		
-		for (int jj = 0; jj < answerFields.size(); jj++) {
-			String answerHolder = stringConverter(answerFields.get(jj).getText());
-			answerFields.get(jj).setText(answerHolder);		
-			
-			String feedbackHolder = stringConverter(feedbackFields.get(jj).getText());
-			feedbackFields.get(jj).setText(feedbackHolder);
-		}
+		String answerHolder = stringConverter(answerFields.getText());
+		answerFields.setText(answerHolder);		
+		
+		String feedbackHolder = stringConverter(feedbackFields.getText());
+		feedbackFields.setText(feedbackHolder);
 		
 		String numRange_1Question = ("::" + qTitle + "::" + qBody + " {");
-		
-		for (int ii = 0; ii < answerFields.size(); ii++) {
-			numRange_1Question += ("#" + answerFields.get(ii).getText() + ":" + qRange); 
-		}
+		numRange_1Question += ("#" + answerFields.getText() + ":" + qRange); 
 		numRange_1Question += ("}");
+		
 		return numRange_1Question;
 	}
 
-	public String buildNumRange_2(String qTitle, String qBody, String rangeStart, String rangeEnd) {
+	public String buildNumRange_2(String qTitle, String qBody, double rangeStart, double rangeEnd) {
 		qTitle = stringConverter(qTitle);
 		qBody = stringConverter(qBody);
-		double qRangeStart = Double.parseDouble(rangeStart);
-		double qRangeEnd = Double.parseDouble(rangeEnd);
+		double qRangeStart = rangeStart;
+		double qRangeEnd = rangeEnd;
 		
 		String numRange_2Question = ("::" + qTitle + "::" + qBody + " {#" + qRangeStart + ".." + qRangeEnd + "}");
 		return numRange_2Question;
 	}
 
-	public String buildNumRange_3(String qTitle, String qBody, ArrayList<JTextField> answerFields, ArrayList<JTextField> feedbackFields, ArrayList<JSpinner> answerSpinners, String rangeStart) {
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public String buildNumRange_3(String qTitle, String qBody, JTextField answerFields, JTextField feedbackFields, double qRange, int rangeMark) {
 		qTitle = stringConverter(qTitle);
 		qBody = stringConverter(qBody);
-		double qRange = Double.parseDouble(rangeStart);
 		
-		for (int jj = 0; jj < answerFields.size(); jj++) {
-			String answerHolder = stringConverter(answerFields.get(jj).getText());
-			answerFields.get(jj).setText(answerHolder);		
+		String answerHolder = stringConverter(answerFields.getText());
+		answerFields.setText(answerHolder);		
 			
-			String feedbackHolder = stringConverter(feedbackFields.get(jj).getText());
-			feedbackFields.get(jj).setText(feedbackHolder);
-		}
+		String feedbackHolder = stringConverter(feedbackFields.getText());
+		feedbackFields.setText(feedbackHolder);
 		
 		String numRange_3Question = ("::" + qTitle + "::" + qBody + " {#");
 		
-		for (int ii = 0; ii < answerFields.size(); ii++) {
-			numRange_3Question += ("=%" + answerSpinners.get(ii).getValue() + "%" + answerFields.get(ii).getText() + ":" + qRange); 
-		}
-		numRange_3Question += ("}");
+		numRange_3Question += ("\n=" + answerFields.getText() + ":0 #" + feedbackFields.getText()); 
+		numRange_3Question += ("\n=%" + rangeMark + "%" + answerFields.getText() + ":" + qRange); 
+		
+		numRange_3Question += ("\n}");
 		return numRange_3Question;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	private String stringConverter(String string){
 		

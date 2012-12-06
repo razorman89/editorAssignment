@@ -9,9 +9,14 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -36,6 +41,7 @@ public class EditorGui extends JFrame {
 	private TrueFalsePane trueFalse;
 	public GiftFormatter EditorFormatter;
 	ExitAction exitAction;
+	SaveAction saveAction;
 
 	/**
 	 * Create the frame.
@@ -88,10 +94,13 @@ public class EditorGui extends JFrame {
 		
 		// create actions
 		exitAction = new ExitAction();
+		saveAction = new SaveAction();
 		
 		// add actions to navbar & filemenu
 		navToolBar.add(exitAction);
+		navToolBar.add(saveAction);
 		fileMenu.add(exitAction);
+		fileMenu.add(saveAction);
 		
 		// set up menu bar, add filemenu
 		JMenuBar menuBar = new JMenuBar();
@@ -208,6 +217,60 @@ public class EditorGui extends JFrame {
 			
 		}
 	} // end inner class ExitAction
+	
+	// user defined actions
+	private class SaveAction extends AbstractAction {
+
+		// set up action's name, descriptions and mnemonic
+		public SaveAction() {
+			putValue(NAME, "Save");
+			putValue(SMALL_ICON, new ImageIcon(getClass().getResource("images/Save.png")));
+			putValue(SHORT_DESCRIPTION, "Save");
+			putValue(LONG_DESCRIPTION, "Save Question Lists to File");
+			putValue(MNEMONIC_KEY, new Integer('s'));
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			StringBuilder sb = new StringBuilder();
+			sb.append(multiChoiceAdv.getQuestionList());
+			sb.append(multiChoiceBas.getQuestionList());
+			sb.append(numericalQuestion.getQuestionList());
+			sb.append(matchingQuestion.getQuestionList());
+			sb.append(fillBlanksQuestion.getQuestionList());
+			sb.append(essayQuestion.getQuestionList());
+			sb.append(trueFalse.getQuestionList());
+			
+			File file = new File(savePath());
+			
+			try {
+				PrintWriter wr = new PrintWriter(file);
+				wr.write(sb.toString());
+				wr.flush();
+				wr.close();
+			} catch (FileNotFoundException e) {
+				System.out.println("ERROR WRITTING / CREATING FILE...");
+				e.printStackTrace();
+			}
+			
+			System.out.println("FILE SAVED AT: " + file.getAbsolutePath());
+		}
+		
+		private String savePath(){
+			
+			JFileChooser fileChooser = new JFileChooser();
+			fileChooser.setCurrentDirectory(new File("."));
+			File filePath = new File("");
+
+			if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+				filePath = fileChooser.getSelectedFile();
+			}
+			
+			String saveHere = filePath.getAbsolutePath();
+			return saveHere;
+		}
+	} // end inner class ExitAction
+	
 
 }
 

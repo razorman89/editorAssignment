@@ -21,6 +21,7 @@ public class TrueFalsePane extends JPanel {
 	private GiftFormatter localFormatter;
 	private String tfAnswer;
 	private int index = 0;
+	private final JTextArea questionsList;
 
 	/**
 	 * Create the panel.
@@ -87,10 +88,10 @@ public class TrueFalsePane extends JPanel {
 		JScrollPane scrollPane_2 = new JScrollPane();
 		add(scrollPane_2, "cell 1 5 3 1,grow");
 		
-		final JTextArea questionsTFGiftyList = new JTextArea();
-		questionsTFGiftyList.setBackground(SystemColor.control);
-		questionsTFGiftyList.setEditable(false);
-		scrollPane_2.setViewportView(questionsTFGiftyList);
+		questionsList = new JTextArea();
+		questionsList.setBackground(SystemColor.control);
+		questionsList.setEditable(false);
+		scrollPane_2.setViewportView(questionsList);
 		
 		JButton btnClearQuestionsList = new JButton("Clear Questions List");
 		add(btnClearQuestionsList, "cell 3 6,growx");
@@ -114,14 +115,14 @@ public class TrueFalsePane extends JPanel {
 				}else{
 					tfAnswer = "F";
 				}
-				questionsTFGiftyList.append("//Question " + index + "\n" + localFormatter.buildT_FGifty(questionTitle.getText(), questionBody.getText(), tfAnswer) + "\n\n");
+				questionsList.append("//Question " + index + "\n" + localFormatter.buildT_FGifty(questionTitle.getText(), questionBody.getText(), tfAnswer) + "\n\n");
 				clearInput(questionTitle, questionBody, radioGroup);
 			}
 		});
 		
 		btnClearQuestionsList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				questionsTFGiftyList.setText("");
+				questionsList.setText("");
 				
 				index = 0;
 			}
@@ -133,6 +134,13 @@ public class TrueFalsePane extends JPanel {
 		questionTitle.setText("");
 		questionBody.setText("");
 		radioGroup.clearSelection();
+	}
+	
+	public String getQuestionList() {
+		String list = questionsList.getText();
+		questionsList.setText("");
+		return list;
+
 	}
 
 }

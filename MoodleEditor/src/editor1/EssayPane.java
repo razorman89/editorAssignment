@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 public class EssayPane extends JPanel {
 	private GiftFormatter localFormatter;
 	private int index = 0;
+	private final JTextArea questionsList;
 
 	/**
 	 * Create the panel.
@@ -57,10 +58,10 @@ public class EssayPane extends JPanel {
 		JScrollPane scrollPane_2 = new JScrollPane();
 		add(scrollPane_2, "cell 1 5 3 1,grow");
 		
-		final JTextArea questionList = new JTextArea();
-		questionList.setBackground(SystemColor.control);
-		questionList.setEditable(false);
-		scrollPane_2.setViewportView(questionList);
+		questionsList = new JTextArea();
+		questionsList.setBackground(SystemColor.control);
+		questionsList.setEditable(false);
+		scrollPane_2.setViewportView(questionsList);
 		
 		JButton btnClearQuestionsList = new JButton("Clear Questions List");
 		add(btnClearQuestionsList, "cell 3 6,growx");
@@ -79,7 +80,7 @@ public class EssayPane extends JPanel {
 		btnCreateGifty.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				index++;
-				questionList.append("//Question " + index + "\n" + localFormatter.buildEssayGifty(questionTitle.getText(), questionBody.getText()) + "\n\n");
+				questionsList.append("//Question " + index + "\n" + localFormatter.buildEssayGifty(questionTitle.getText(), questionBody.getText()) + "\n\n");
 				questionTitle.setText("");
 				questionBody.setText("");
 			}
@@ -87,10 +88,17 @@ public class EssayPane extends JPanel {
 		
 		btnClearQuestionsList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				questionList.setText("");
+				questionsList.setText("");
 				index = 0;
 			}
 		});
+
+	}
+	
+	public String getQuestionList() {
+		String list = questionsList.getText();
+		questionsList.setText("");
+		return list;
 
 	}
 

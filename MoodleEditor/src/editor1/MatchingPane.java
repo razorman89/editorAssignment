@@ -27,6 +27,7 @@ public class MatchingPane extends JPanel {
 	private ArrayList<JTextField> questionFields = new ArrayList<JTextField>();
 	private ArrayList<JCheckBox> checkBoxs = new ArrayList<JCheckBox>();
 	private int index = 0;
+	private final JTextArea questionsList;
 
 	/**
 	 * Create the panel.
@@ -125,7 +126,7 @@ public class MatchingPane extends JPanel {
 		JScrollPane scrollPane_2 = new JScrollPane();
 		add(scrollPane_2, "cell 1 5 3 1,grow");
 		
-		final JTextArea questionsList = new JTextArea();
+		questionsList = new JTextArea();
 		questionsList.setBackground(SystemColor.control);
 		questionsList.setEditable(false);
 		scrollPane_2.setViewportView(questionsList);
@@ -235,6 +236,13 @@ public class MatchingPane extends JPanel {
 			questionFields.get(ii).setText("");
 			checkBoxs.get(ii).setSelected(false);
 		}
+	}
+	
+	public String getQuestionList() {
+		String list = questionsList.getText();
+		questionsList.setText("");
+		return list;
+
 	}
 
 }
