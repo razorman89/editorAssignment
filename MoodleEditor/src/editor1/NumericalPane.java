@@ -222,7 +222,7 @@ public class NumericalPane extends JPanel {
 					
 				case 2:
 					autoClear(answersPanel, questionTitle, questionBody, rangeStart, rangeEnd);
-					answersPanel.setVisible(true);
+					answersPanel.setVisible(false);
 					ansSpinner.setEnabled(false);
 					rangePanel.setVisible(true);
 					lblRangeStart.setText("Range Start:");
@@ -244,9 +244,9 @@ public class NumericalPane extends JPanel {
 					btnRemoveAnswer.setEnabled(true);
 					btnClearText.setEnabled(true);
 					btnCreateGifty.setEnabled(true);
-					lblRangeStart.setText("Range Start:");
-					rangeEnd.setEditable(true);
-					rangeEnd.setBackground(Color.WHITE);
+					lblRangeStart.setText("Range (+/-) :");
+					rangeEnd.setEditable(false);
+					rangeEnd.setBackground(Color.LIGHT_GRAY);
 
 					break;
 
@@ -260,8 +260,6 @@ public class NumericalPane extends JPanel {
 			}
 		});
 
-		
-		
 		btnNewAnswer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				rowCount++;
@@ -282,16 +280,13 @@ public class NumericalPane extends JPanel {
 				answersPanel.updateUI();
 			}
 		});
-		
-		
-		
+
 		btnClearText.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				clearInput(questionTitle, questionBody, rangeStart, rangeEnd);
 			}
 		});
-				
-		
+
 		btnRemoveAnswer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(rowCount > 0){
@@ -306,12 +301,27 @@ public class NumericalPane extends JPanel {
 				}
 			}
 		});
-				
-				
+					
 		btnCreateGifty.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				index++;
-//						questionsMultiAdvGiftyList.append("//Question " + index + "\n" + localFormatter.buildMultiChoiceAdv(questionTitle.getText(), questionBody.getText(), answerFields, feedbackFields, answerSpinners) + "\n\n");
+				switch (questionTypes.getSelectedIndex()) {
+					
+				case 1:
+					questionsList.append("//Question " + index + ", Type '" + options[1] + "'\n" + localFormatter.buildNumRange_1(questionTitle.getText(), questionBody.getText(), answerFields, feedbackFields, rangeStart.getText()) + "\n\n");
+					break;
+					
+				case 2:
+					questionsList.append("//Question " + index + ", Type '" + options[2] + "'\n" + localFormatter.buildNumRange_2(questionTitle.getText(), questionBody.getText(), rangeStart.getText(), rangeEnd.getText()) + "\n\n");
+					break;
+					
+				case 3:
+					questionsList.append("//Question " + index + ", Type '" + options[3] + "'\n" + localFormatter.buildNumRange_3(questionTitle.getText(), questionBody.getText(), answerFields, feedbackFields, answerSpinners, rangeStart.getText()) + "\n\n");
+					break;
+
+				default:
+					break;
+				}
 				clearInput(questionTitle, questionBody, rangeStart, rangeEnd);
 			}
 		});
@@ -322,7 +332,6 @@ public class NumericalPane extends JPanel {
 				index = 0;
 			}
 		});
-
 	}
 	
 	private void clearInput(final JTextArea questionTitle, final JTextArea questionBody, JTextField rangeStart, JTextField rangeEnd) {
@@ -335,7 +344,6 @@ public class NumericalPane extends JPanel {
 			answerFields.get(ii).setText("");
 			feedbackFields.get(ii).setText("");
 			answerSpinners.get(ii).setValue(0);
-			
 		}
 	}
 	
@@ -361,5 +369,4 @@ public class NumericalPane extends JPanel {
 //		clearInput(questionTitle, questionBody, rangeStart, rangeEnd);
 //		System.out.println("-A-\nANSWERS: " + answerFields.size() + "\nFEEDBACK: " + feedbackFields.size() + "\nSPINNERS: " + answerSpinners.size() + "\n-A-\n");
 	}
-
 }

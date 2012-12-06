@@ -128,6 +128,63 @@ public class GiftFormatter {
 		return blanksQuestion;
 	}
 	
+	
+	
+	
+	public String buildNumRange_1(String qTitle, String qBody, ArrayList<JTextField> answerFields, ArrayList<JTextField> feedbackFields, String rangeStart) {
+		qTitle = stringConverter(qTitle);
+		qBody = stringConverter(qBody);
+		double qRange = Double.parseDouble(rangeStart);
+		
+		for (int jj = 0; jj < answerFields.size(); jj++) {
+			String answerHolder = stringConverter(answerFields.get(jj).getText());
+			answerFields.get(jj).setText(answerHolder);		
+			
+			String feedbackHolder = stringConverter(feedbackFields.get(jj).getText());
+			feedbackFields.get(jj).setText(feedbackHolder);
+		}
+		
+		String numRange_1Question = ("::" + qTitle + "::" + qBody + " {");
+		
+		for (int ii = 0; ii < answerFields.size(); ii++) {
+			numRange_1Question += ("#" + answerFields.get(ii).getText() + ":" + qRange); 
+		}
+		numRange_1Question += ("}");
+		return numRange_1Question;
+	}
+
+	public String buildNumRange_2(String qTitle, String qBody, String rangeStart, String rangeEnd) {
+		qTitle = stringConverter(qTitle);
+		qBody = stringConverter(qBody);
+		double qRangeStart = Double.parseDouble(rangeStart);
+		double qRangeEnd = Double.parseDouble(rangeEnd);
+		
+		String numRange_2Question = ("::" + qTitle + "::" + qBody + " {#" + qRangeStart + ".." + qRangeEnd + "}");
+		return numRange_2Question;
+	}
+
+	public String buildNumRange_3(String qTitle, String qBody, ArrayList<JTextField> answerFields, ArrayList<JTextField> feedbackFields, ArrayList<JSpinner> answerSpinners, String rangeStart) {
+		qTitle = stringConverter(qTitle);
+		qBody = stringConverter(qBody);
+		double qRange = Double.parseDouble(rangeStart);
+		
+		for (int jj = 0; jj < answerFields.size(); jj++) {
+			String answerHolder = stringConverter(answerFields.get(jj).getText());
+			answerFields.get(jj).setText(answerHolder);		
+			
+			String feedbackHolder = stringConverter(feedbackFields.get(jj).getText());
+			feedbackFields.get(jj).setText(feedbackHolder);
+		}
+		
+		String numRange_3Question = ("::" + qTitle + "::" + qBody + " {#");
+		
+		for (int ii = 0; ii < answerFields.size(); ii++) {
+			numRange_3Question += ("=%" + answerSpinners.get(ii).getValue() + "%" + answerFields.get(ii).getText() + ":" + qRange); 
+		}
+		numRange_3Question += ("}");
+		return numRange_3Question;
+	}
+	
 	private String stringConverter(String string){
 		
 		string = string.replace("~", "\\~");
@@ -139,7 +196,5 @@ public class GiftFormatter {
 		
 		return string;
 	}
-
-
 
 }
