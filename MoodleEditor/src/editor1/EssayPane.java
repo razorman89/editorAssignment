@@ -51,8 +51,8 @@ public class EssayPane extends JPanel {
 		JSeparator separator = new JSeparator();
 		add(separator, "cell 1 4 3 1,grow");
 		
-		JLabel label = new JLabel("Questions:");
-		add(label, "cell 0 5,alignx right,aligny top");
+		JLabel lblGiftOutput = new JLabel("Gift Output:");
+		add(lblGiftOutput, "cell 0 5,alignx right,aligny top");
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
 		add(scrollPane_2, "cell 1 5 3 1,grow");
@@ -62,7 +62,7 @@ public class EssayPane extends JPanel {
 		questionsList.setEditable(false);
 		scrollPane_2.setViewportView(questionsList);
 		
-		JButton btnClearQuestionsList = new JButton("Clear Questions List");
+		JButton btnClearQuestionsList = new JButton("Clear Output List");
 		add(btnClearQuestionsList, "cell 3 6,growx");
 		
 		

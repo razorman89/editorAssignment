@@ -81,7 +81,7 @@ public class TrueFalsePane extends JPanel {
 		JSeparator separator_3 = new JSeparator();
 		add(separator_3, "cell 1 4 3 1,grow");
 		
-		JLabel lblOutput = new JLabel("Questions:");
+		JLabel lblOutput = new JLabel("Gift Output:");
 		add(lblOutput, "cell 0 5,alignx right,aligny top");
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
@@ -92,7 +92,7 @@ public class TrueFalsePane extends JPanel {
 		questionsList.setEditable(false);
 		scrollPane_2.setViewportView(questionsList);
 		
-		JButton btnClearQuestionsList = new JButton("Clear Questions List");
+		JButton btnClearQuestionsList = new JButton("Clear Output List");
 		add(btnClearQuestionsList, "cell 3 6,growx");
 		
 		

@@ -134,7 +134,7 @@ public class NumericalPane extends JPanel {
 		JSeparator separator = new JSeparator();
 		add(separator, "cell 1 6 4 1,grow");
 		
-		JLabel lblGeneratedQuestions = new JLabel("Questions:");
+		JLabel lblGeneratedQuestions = new JLabel("Gift Output:");
 		add(lblGeneratedQuestions, "cell 0 7,alignx right,aligny top");
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
@@ -145,7 +145,7 @@ public class NumericalPane extends JPanel {
 		questionsList.setBackground(SystemColor.control);
 		scrollPane_2.setViewportView(questionsList);
 		
-		JButton btnClearQuestionsList = new JButton("Clear Questions List");
+		JButton btnClearQuestionsList = new JButton("Clear Output List");
 		add(btnClearQuestionsList, "cell 4 8,growx");
 
 		

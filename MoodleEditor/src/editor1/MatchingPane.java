@@ -119,7 +119,7 @@ public class MatchingPane extends JPanel {
 		JSeparator separator = new JSeparator();
 		add(separator, "cell 1 4 3 1,grow");
 		
-		JLabel lblQuestions = new JLabel("Questions:");
+		JLabel lblQuestions = new JLabel("Gift Output:");
 		add(lblQuestions, "cell 0 5,alignx right,aligny top");
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
@@ -130,8 +130,8 @@ public class MatchingPane extends JPanel {
 		questionsList.setEditable(false);
 		scrollPane_2.setViewportView(questionsList);
 		
-		JButton button_2 = new JButton("Clear Questions List");
-		add(button_2, "cell 3 6,growx");
+		JButton btnClearOutputList = new JButton("Clear Output List");
+		add(btnClearOutputList, "cell 3 6,growx");
 		
 		
 		btnAddQa.addActionListener(new ActionListener() {
@@ -216,7 +216,7 @@ public class MatchingPane extends JPanel {
 			}
 		});
 		
-		button_2.addActionListener(new ActionListener() {
+		btnClearOutputList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				questionsList.setText("");
 			}

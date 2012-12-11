@@ -88,7 +88,7 @@ public class GiftFormatter {
 		}
 		
 		String matchQAsQuestion = "";
-		matchQAsQuestion = ("::" + qTitle + "{");
+		matchQAsQuestion = ("::" + qTitle + "::{");
 		
 		for (int ii = 0; ii < answerFields.size(); ii++) {
 			matchQAsQuestion += ("\n=" + questionFields.get(ii).getText() + " -> " + answerFields.get(ii).getText());

@@ -114,7 +114,7 @@ public class BlanksPane extends JPanel {
 		JSeparator separator_2 = new JSeparator();
 		add(separator_2, "cell 1 7 3 1,grow");
 		
-		JLabel lblQuestions = new JLabel("Questions:");
+		JLabel lblQuestions = new JLabel("Gift Output:");
 		add(lblQuestions, "cell 0 8,alignx right,aligny top");
 		
 		JScrollPane scrollPane_4 = new JScrollPane();
@@ -125,7 +125,7 @@ public class BlanksPane extends JPanel {
 		questionsList.setEditable(false);
 		scrollPane_4.setViewportView(questionsList);
 		
-		JButton btnClearQuestionsList = new JButton("Clear Questions List");
+		JButton btnClearQuestionsList = new JButton("Clear Gift List");
 		add(btnClearQuestionsList, "cell 3 9,growx");
 		
 		

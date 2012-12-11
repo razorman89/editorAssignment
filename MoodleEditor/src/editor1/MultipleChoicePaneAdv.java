@@ -121,7 +121,7 @@ public class MultipleChoicePaneAdv extends JPanel {
 		JSeparator separator = new JSeparator();
 		add(separator, "cell 2 7 5 1,grow");
 		
-		JLabel lblGeneratedQuestions = new JLabel("Questions:");
+		JLabel lblGeneratedQuestions = new JLabel("Gift Output:");
 		add(lblGeneratedQuestions, "cell 0 8,alignx right,aligny top");
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
@@ -132,7 +132,7 @@ public class MultipleChoicePaneAdv extends JPanel {
 		questionsList.setBackground(SystemColor.control);
 		scrollPane_2.setViewportView(questionsList);
 		
-		JButton btnClearQuestionsList = new JButton("Clear Questions List");
+		JButton btnClearQuestionsList = new JButton("Clear Output List");
 		add(btnClearQuestionsList, "cell 5 9 2 1,growx");
 		
 		
